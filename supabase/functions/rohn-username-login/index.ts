@@ -33,7 +33,7 @@ Deno.serve(async req=>{
   const input=await req.json();
   if(input.action==='login'){
    const {username,password}=input;
-   if(typeof username!=='string'||!name.test(username)||typeof password!=='string'||password.length<12||password.length>256)return reply(401,{message:'Invalid credentials'});
+   if(typeof username!=='string'||!name.test(username)||typeof password!=='string'||password.length<8||password.length>256)return reply(401,{message:'Invalid credentials'});
    const accounts=await db('rpc/rohn_verify_password','POST',{p_username:username,p_password:password});
    if(!accounts?.length)return reply(401,{message:'Invalid credentials'});
    const access_token=randomToken(),expires_at=new Date(Date.now()+7*86400000).toISOString();
@@ -55,7 +55,7 @@ Deno.serve(async req=>{
    return reply(200,{username:a[0].username,role:a[0].role});
   }
   if(input.action==='password'){
-   if(typeof input.current!=='string'||typeof input.next!=='string'||input.next.length<12||input.next.length>256||input.current===input.next)return reply(400,{message:'Invalid password'});
+   if(typeof input.current!=='string'||typeof input.next!=='string'||!/^[0-9]{8}$/.test(input.next)||input.current===input.next)return reply(400,{message:'Invalid password'});
    const changed=await db('rpc/rohn_update_password','POST',{p_account:owner,p_current:input.current,p_next:input.next});
    if(!changed)return reply(401,{message:'รหัสผ่านปัจจุบันไม่ถูกต้อง'});
    await db(`rohn_sessions?account_id=eq.${owner}`,'DELETE');
