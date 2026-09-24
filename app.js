@@ -57,7 +57,7 @@ function render(){
 }
 function profileView(){
   if(!live)return '<div class="box"><h2>โปรไฟล์</h2><p>ตัวอย่างในเบราว์เซอร์ไม่มีบัญชีผู้ใช้</p></div>';
-  return `<div class="profile-layout"><div class="box"><h2>ชื่อผู้ใช้</h2><p class="tiny">สิทธิ์: ${state.profile?.role==='admin'?'ผู้ดูแลระบบ':'ผู้พัฒนา'} · ใช้ username นี้เข้าระบบครั้งถัดไป</p><form id="username-form" class="form-grid"><label class="field span2">Username<input name="username" required minlength="3" maxlength="32" pattern="[A-Za-z][A-Za-z0-9_-]{2,31}" value="${esc(state.profile?.username)}" autocapitalize="none" spellcheck="false"></label><button class="primary">บันทึกชื่อผู้ใช้</button></form></div><div class="box"><h2>เปลี่ยนรหัสผ่าน</h2><p class="tiny">กรอกรหัสเดิมเพื่อยืนยัน แล้วเข้าสู่ระบบใหม่ด้วยรหัสใหม่</p><form id="password-form" class="form-grid"><label class="field span2">รหัสผ่านปัจจุบัน<input name="current" type="password" required autocomplete="current-password"></label><label class="field span2">รหัสผ่านใหม่<input name="next" type="password" required minlength="12" autocomplete="new-password"></label><label class="field span2">ยืนยันรหัสผ่านใหม่<input name="confirm" type="password" required minlength="12" autocomplete="new-password"></label><button class="primary">เปลี่ยนรหัสผ่าน</button></form></div></div>`;
+  return `<div class="profile-layout"><div class="box"><h2>ชื่อผู้ใช้</h2><p class="tiny">สิทธิ์: ${state.profile?.role==='admin'?'ผู้ดูแลระบบ':'ผู้พัฒนา'} · ใช้ username นี้เข้าระบบครั้งถัดไป</p><form id="username-form" class="form-grid"><label class="field span2">Username<input name="username" required minlength="3" maxlength="32" pattern="[A-Za-z][A-Za-z0-9_-]{2,31}" value="${esc(state.profile?.username)}" autocapitalize="none" spellcheck="false"></label><button class="primary">บันทึกชื่อผู้ใช้</button></form></div><div class="box"><h2>เปลี่ยนรหัสผ่าน</h2><p class="tiny">กรอกรหัสเดิมเพื่อยืนยัน แล้วเข้าสู่ระบบใหม่ด้วยรหัสตัวเลข 8 หลัก</p><form id="password-form" class="form-grid"><label class="field span2">รหัสผ่านปัจจุบัน<input name="current" type="password" required autocomplete="current-password"></label><label class="field span2">รหัสผ่านใหม่<input name="next" type="password" required minlength="8" maxlength="8" pattern="[0-9]{8}" inputmode="numeric" autocomplete="new-password"></label><label class="field span2">ยืนยันรหัสผ่านใหม่<input name="confirm" type="password" required minlength="8" maxlength="8" pattern="[0-9]{8}" inputmode="numeric" autocomplete="new-password"></label><button class="primary">เปลี่ยนรหัสผ่าน</button></form></div></div>`;
 }
 async function saveUsername(form){
   const username=form.elements.username.value.trim();
@@ -67,7 +67,7 @@ async function saveUsername(form){
 }
 async function savePassword(form){
   const {current,next,confirm:confirmation}=Object.fromEntries(new FormData(form));
-  if(next.length<12||next!==confirmation){notice('รหัสผ่านใหม่ต้องมีอย่างน้อย 12 ตัว และยืนยันให้ตรงกัน');return}
+  if(!/^[0-9]{8}$/.test(next)||next!==confirmation){notice('รหัสผ่านใหม่ต้องเป็นตัวเลข 8 หลัก และยืนยันให้ตรงกัน');return}
   if(current===next){notice('กรุณาตั้งรหัสผ่านใหม่ให้ต่างจากเดิม');return}
   const changed=await run(()=>endpoint({action:'password',current,next}));
   if(changed){state.session=null;state.profile=null;localStorage.removeItem('rohn-session');renderAuth();notice('เปลี่ยนรหัสผ่านแล้ว กรุณาเข้าสู่ระบบใหม่')}
