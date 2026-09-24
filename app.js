@@ -41,7 +41,7 @@ async function load(){
 }
 function renderAuth(){
   state.view='login';$('#page-title').textContent='เข้าสู่ระบบ';$('#page-subtitle').textContent='เข้าใช้งานระบบใบเสนอราคา ROHN';
-  $('#content').innerHTML=`<div class="panel" style="max-width:460px;padding:30px;margin:7vh auto"><h2>ยินดีต้อนรับสู่ ROHN</h2><p class="tiny">ลงชื่อเข้าใช้ด้วย username และ password ที่ได้รับ</p><form id="login-form" class="form-grid"><label class="field span2">Username<input name="username" required autocomplete="username" autocapitalize="none" spellcheck="false"></label><label class="field span2">Password<input name="password" type="password" required autocomplete="current-password"></label><button class="primary span2">เข้าสู่ระบบ</button></form></div>`;
+  $('#content').innerHTML=`<div class="panel" style="max-width:460px;padding:30px;margin:7vh auto"><h2>ยินดีต้อนรับสู่ ROHN</h2><p class="tiny">ลงชื่อเข้าใช้ด้วย username และรหัสผ่านตัวเลข 8 หลัก</p><form id="login-form" class="form-grid"><label class="field span2">Username<input name="username" required autocomplete="username" autocapitalize="none" spellcheck="false"></label><label class="field span2">Password<input name="password" type="password" required minlength="8" maxlength="8" pattern="[0-9]{8}" inputmode="numeric" autocomplete="current-password"></label><button class="primary span2">เข้าสู่ระบบ</button></form></div>`;
   $('#new-quote').hidden=true;$('#signout').hidden=true;$('#user-badge').textContent='PRIVATE';
 }
 function render(){
