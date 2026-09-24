@@ -16,3 +16,5 @@ This is a quotation planning tool; no invoicing, payment collection, or automati
 ## Authentication
 
 Three initial usernames: `UN_HEAD` (admin), `GONG-Dev` and `TIW-Dev` (developers). Their passwords are generated separately and never committed. Usernames are matched without case sensitivity. Authentication uses `rohn_accounts` and `rohn_sessions`, not Supabase Auth. The role is stored for future permission controls; all three accounts currently have the same quotation permissions.
+
+Initial passwords and profile password changes use eight decimal digits. Five failed sign-in attempts for the same username lock further attempts for 15 minutes. Do not commit passwords or distribute them in repository files.
