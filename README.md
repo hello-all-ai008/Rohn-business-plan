@@ -5,10 +5,14 @@ Private quotation planning for ROHN Timing System. A separate clean A4 quotation
 ## Setup
 
 1. Supabase project `Rohn-business-plan` already exists in Singapore: `aogbdhzuzrjwlisjkwuf`.
-2. The migration `supabase/migrations/20260924000000_initial.sql` has been applied already. The schema uses email/password Auth and owner scoped RLS. Create your own account via the app; email confirmation depends on project Auth settings.
+2. Apply the migrations in order. The last migration creates `rohn_accounts` and `rohn_sessions`; the three initial accounts have already been provisioned in the connected project. The app has no self-signup UI.
 3. `config.js` has the project URL and **publishable** key. The key is public by design. Never use a service role/secret key in the browser.
-4. Deploy this directory as a static Vercel site (Framework: Other; no build step) and configure Supabase Auth Site URL to the deployed URL.
+4. Deploy the `rohn-username-login` Edge Function with `verify_jwt = false` (it verifies its own opaque sessions). Deploy this directory as a static Vercel site (Framework: Other; no build step).
 
-With the provided configuration, the sign-in screen opens and writes are stored in Supabase. Quotes, clients, items, and internal allocations are separate tables. Every user sees only their records. The print view is assembled from approved fields only; confidential values are absent from its DOM.
+With the provided configuration, the sign-in screen opens and writes are stored in Supabase. Quotes, clients, items, internal allocations, accounts, and sessions are separate tables. Every user sees only their records. The browser calls an Edge Function, which validates sessions and scopes every database request to the verified account. Direct access to these tables is revoked for anonymous and authenticated browser keys. Passwords are bcrypt hashes; opaque session tokens are stored as SHA-256 hashes. Accounts must be provisioned by an administrator. Profile edits permit changing a user's own username and password; password changes revoke all existing sessions. The print view is assembled from approved fields only; confidential values are absent from its DOM.
 
 This is a quotation planning tool; no invoicing, payment collection, or automatic VAT decision is provided. Set tax percent and seller registration details to fit your actual business before sending a document. Browser print offers Save as PDF.
+
+## Authentication
+
+Three initial usernames: `UN_HEAD` (admin), `GONG-Dev` and `TIW-Dev` (developers). Their passwords are generated separately and never committed. Usernames are matched without case sensitivity. Authentication uses `rohn_accounts` and `rohn_sessions`, not Supabase Auth. The role is stored for future permission controls; all three accounts currently have the same quotation permissions.
