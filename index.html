@@ -1,5 +1,26 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#141525"><title>Rohn Business Plan · ใบเสนอราคา</title><link rel="stylesheet" href="styles.css"></head><body>
-<div id="app"><aside class="sidebar"><div class="logo"><span class="logo-mark">R</span><div><strong>ROHN</strong><small>BUSINESS PLAN</small></div></div><div class="nav-label">WORKSPACE</div><button class="nav active" data-view="dashboard">▦ <span>ภาพรวม</span></button><button class="nav" data-view="quotes">▤ <span>ใบเสนอราคา</span></button><button class="nav" data-view="clients">♧ <span>ลูกค้า</span></button><button class="nav" data-view="profile">◉ <span>โปรไฟล์</span></button><div class="sidebar-bottom"><div class="online-dot"></div><span id="mode-label">กำลังเตรียมระบบ</span><button id="signout" hidden>ออกจากระบบ</button></div></aside>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#141525"><title>Rohn Business Plan · ใบเสนอราคา</title><meta name="description" content="Private quotation planning for ROHN Timing System. จัดการข้อเสนอและงบประมาณในที่เดียว"><meta property="og:title" content="Rohn Business Plan · ใบเสนอราคา"><meta property="og:description" content="Private quotation planning for ROHN Timing System. จัดการข้อเสนอและงบประมาณในที่เดียว"><link rel="stylesheet" href="styles.css"></head><body>
+<div id="app"><aside class="sidebar"><div class="logo"><span class="logo-mark">R</span><div><strong>ROHN</strong><small>BUSINESS PLAN</small></div></div><div class="nav-label">WORKSPACE</div><button class="nav active" data-view="dashboard">▦ <span>ภาพรวม</span></button><button class="nav" data-view="quotes">▤ <span>ใบเสนอราคา</span></button><button class="nav" data-view="services">❖ <span>บริการ & โปร</span></button><button class="nav" data-view="clients">♧ <span>ลูกค้า</span></button><button class="nav" data-view="profile">◉ <span>โปรไฟล์</span></button><div class="sidebar-bottom"><div class="online-dot"></div><span id="mode-label">กำลังเตรียมระบบ</span><button id="signout" hidden>ออกจากระบบ</button></div></aside>
 <main><header class="top"><div><div class="eyebrow">ROHN / WORKSPACE</div><h1 id="page-title">ภาพรวมธุรกิจ</h1><p id="page-subtitle">จัดการข้อเสนอและงบประมาณในที่เดียว</p></div><div class="top-actions"><span id="user-badge" class="user-badge">DEMO</span><button class="primary" id="new-quote">＋ สร้างใบเสนอราคา</button></div></header><div id="notice" class="notice" hidden></div><section id="content"></section></main></div>
 <div id="modal" class="modal" hidden><div class="modal-inner"><button class="close" id="modal-close">×</button><div id="modal-content"></div></div></div>
-<div id="print-root" hidden></div><script src="config.js"></script><script src="app.js"></script></body></html>
+<div id="print-root" hidden></div>
+<div id="auth-loader" class="auth-loader" hidden aria-live="polite">
+  <div class="auth-loader-card">
+    <div class="auth-loader-rings">
+      <div class="ring ring-outer"></div>
+      <div class="ring ring-inner"></div>
+      <div class="auth-loader-logo">
+        <span class="logo-mark glow">R</span>
+      </div>
+    </div>
+    <div class="auth-loader-brand">
+      <strong>ROHN</strong>
+      <small>BUSINESS PLAN</small>
+    </div>
+    <div class="auth-loader-status" id="auth-loader-text">กำลังตรวจสอบข้อมูลความปลอดภัย...</div>
+    <div class="auth-progress-track">
+      <div class="auth-progress-bar" id="auth-loader-bar"></div>
+    </div>
+    <div class="auth-loader-subtext" id="auth-loader-sub">กรุณารอสักครู่ กำลังเตรียมพื้นที่ทำงาน</div>
+  </div>
+</div>
+<script src="config.js"></script><script src="app.js"></script></body></html>

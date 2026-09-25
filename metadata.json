@@ -1,0 +1,7 @@
+{
+  "name": "Rohn Business Plan · ใบเสนอราคา",
+  "description": "Private quotation planning for ROHN Timing System. จัดการข้อเสนอและงบประมาณในที่เดียว",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
